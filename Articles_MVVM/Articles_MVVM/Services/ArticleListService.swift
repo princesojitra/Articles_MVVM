@@ -16,24 +16,27 @@ class ArticleListService: NSObject {
     static let pageLimit = 10
     
     //pagination
-    var currentPage = 1
-    var pageOffset = 0
+    var page = 1
     var isMoreResult = false
+    var pageOffset = 0
+    var articlesData = [NSManagedObject]()
     
     func fetchArticles(isFromFirstPage:Bool,isShowLoader:Bool,completion: @escaping (Error?,Bool) -> ()) {
         
-        //check loader to show
+        
         if isShowLoader {
-        CustomLoader.shared.showLoader(color:AppColor.Color_NavyBlue)
+            CustomLoader.shared.showLoader(color:AppColor.Color_NavyBlue)
         }
         
-        //check start page to load
+        //check start page load
         if isFromFirstPage {
-            self.currentPage = 1
+            self.page = 1
             self.pageOffset = 0
+            self.articlesData.removeAll()
+            CoreDataContext.deleteAndRebuild()
         }
         
-        let urlString = Constants.WebServcie.ArticleList + "?page=" + "\(currentPage)" + "&limit=" + "\(ArticleListService.pageLimit)"
+        let urlString = Constants.WebServcie.ArticleList + "?page=" + "\(page)" + "&limit=" + "\(ArticleListService.pageLimit)"
         
         guard let url = URL(string: urlString) else { return }
         
@@ -45,48 +48,179 @@ class ArticleListService: NSObject {
         
         URLSession.shared.dataTask(with: url) { (data, resp, err) in
             if let err = err {
-                
-                //check loader to hide
-                if isShowLoader {
-                  CustomLoader.shared.hideLoader()
-                }
-                
-                print("Failed to fetch courses:", err)
-                print("******* API Log ******")
                 completion(err, false)
+                print("Failed to fetch courses:", err)
+                if isShowLoader {
+                    CustomLoader.shared.hideLoader()
+                }
+                print("******* API Log ******")
+                return
             }
             
             // check response
             guard let data = data else { return }
             do {
                 let articles = try JSONDecoder().decode([ArticlesDataModel].self, from: data)
-                print("Response:",articles )
-                
                 DispatchQueue.main.async {
-                
+                    
                     //check more pages available to load
                     if articles.count == ArticleListService.pageLimit {
                         self.isMoreResult = true
-                        self.currentPage = self.currentPage + 1
-                    }else{
+                        self.page = self.page + 1
+                        
+                    }
+                    else{
                         self.isMoreResult = false
                     }
                     
-                    //check loader to hide
+                    if articles.count > 0 {
+                        
+                        for articleData in articles {
+                            let article = UserArticle(context: CoreDataContext.persistentContainer.viewContext)
+                            self.configure(article: article, usingArticleDataModel: articleData)
+                        }
+                    }
+                    completion(nil, self.isMoreResult)
+                    print("Response:",articles )
                     if isShowLoader {
-                      CustomLoader.shared.hideLoader()
+                        CustomLoader.shared.hideLoader()
                     }
                     print("******* API Log ******")
-                    completion(nil, self.isMoreResult)
                 }
             } catch let jsonErr {
-                //check loader to hide
-                if isShowLoader {
-                  CustomLoader.shared.hideLoader()
-                }
                 print("Failed to decode:", jsonErr)
+                if isShowLoader {
+                    CustomLoader.shared.hideLoader()
+                }
                 print("******* API Log ******")
             }
         }.resume()
+    }
+    
+    
+    func  configure(article: UserArticle, usingArticleDataModel: ArticlesDataModel)  {
+        
+        let articleId = Int64(usingArticleDataModel.id ?? "1") ?? 0
+        
+        let fetchRequest: NSFetchRequest<UserArticle> = UserArticle.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "articleID = %d", articleId )
+        
+        var results: [NSManagedObject] = []
+        
+        do {
+            results = try CoreDataContext.persistentContainer.viewContext.fetch(fetchRequest)
+        }
+        catch {
+            print("error executing fetch request: \(error)")
+        }
+        
+        if results.count > 0 {
+            print("record exist, id:",articleId)
+            if let articleFromDatabase = results[0] as? UserArticle {
+                self.setUpdatedArticleDetails(article: articleFromDatabase, usingArticleDataModel: usingArticleDataModel)
+                CoreDataContext.persistentContainer.viewContext.refresh(articleFromDatabase, mergeChanges: true)
+                
+            }
+        }
+        else{
+            print("record not exist, id:",articleId)
+            self.setUpdatedArticleDetails(article: article, usingArticleDataModel: usingArticleDataModel)
+            CoreDataContext.saveContext()
+            
+        }
+        
+    }
+    
+    
+    func setUpdatedArticleDetails(article: UserArticle, usingArticleDataModel: ArticlesDataModel) {
+        article.articleComments = Int32(usingArticleDataModel.comments ?? 0)
+        article.articleLikes = Int32(usingArticleDataModel.likes ?? 0)
+        article.articleContent = usingArticleDataModel.content
+        article.articleDuration = "1 hr"
+        article.articleID = Int64(usingArticleDataModel.id ?? "1") ?? 0
+        if usingArticleDataModel.user?.count ?? 0 > 0 {
+            let userData = usingArticleDataModel.user?[0]
+            article.userName = userData?.name ?? ""
+            article.userDesignation = userData?.designation ?? ""
+            article.imgUrlUser = userData?.avatar ?? ""
+        }
+        
+        if usingArticleDataModel.media?.count ?? 0 > 0 {
+            let mediaData = usingArticleDataModel.media?[0]
+            article.articleTitle = mediaData?.title ?? ""
+            article.imgUrlArticle = mediaData?.image ?? ""
+            article.articleUrl = mediaData?.url ?? ""
+        }
+    }
+    
+    func loadSavedArticlesDataOnline() -> [NSManagedObject]{
+        
+        let fetchRequest: NSFetchRequest<UserArticle> = UserArticle.fetchRequest()
+        fetchRequest.fetchOffset = pageOffset
+        fetchRequest.fetchLimit = ArticleListService.pageLimit
+        do {
+            
+            let articlesData = try CoreDataContext.persistentContainer.viewContext.fetch(fetchRequest)
+            print("Got \(articlesData.count) articles")
+            self.pageOffset = self.pageOffset + 10
+            self.articlesData.append(contentsOf: articlesData)
+            return self.articlesData
+            
+        } catch {
+            print("Fetch failed")
+        }
+        return [NSManagedObject]()
+    }
+    
+    func loadSavedArticlesDataOffline() -> ([NSManagedObject],Bool){
+        
+        CustomLoader.shared.showLoader(color:AppColor.Color_NavyBlue)
+        
+        var isMoreResult = false
+        let totalRecords = ArticleListService.shared.getArticleRecordsCount()
+        
+        if self.articlesData.count < totalRecords {
+            if self.articlesData.count % ArticleListService.pageLimit == 0{
+                isMoreResult = true
+            }
+            else{
+                isMoreResult = false
+            }
+        }
+        
+        let fetchRequest: NSFetchRequest<UserArticle> = UserArticle.fetchRequest()
+        fetchRequest.fetchOffset = pageOffset
+        fetchRequest.fetchLimit = ArticleListService.pageLimit
+        do {
+            
+            let articlesData = try CoreDataContext.persistentContainer.viewContext.fetch(fetchRequest)
+            print("Got \(articlesData.count) articles")
+            self.pageOffset = self.pageOffset + 10
+            self.articlesData.append(contentsOf: articlesData)
+            return (self.articlesData, isMoreResult)
+            
+        } catch {
+            print("Fetch failed")
+        }
+        return ([NSManagedObject](), isMoreResult)
+    }
+    
+    func getArticleRecordsCount() -> Int {
+        let fetchRequest: NSFetchRequest<UserArticle> = UserArticle.fetchRequest()
+        do {
+            let count = try CoreDataContext.persistentContainer.viewContext.count(for: fetchRequest)
+            print("Total Count:",count)
+            return count
+        } catch {
+            print(error.localizedDescription)
+        }
+        return 0
+    }
+    
+    
+    func loadArticlesDataFromStartPage() -> ([NSManagedObject] ,Bool){
+        ArticleListService.shared.articlesData.removeAll()
+        ArticleListService.shared.pageOffset = 0
+        return self.loadSavedArticlesDataOffline()
     }
 }
