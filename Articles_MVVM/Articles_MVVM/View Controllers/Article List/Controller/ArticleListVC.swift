@@ -10,10 +10,28 @@ import UIKit
 
 class ArticleListVC: UIViewController {
 
+    @IBOutlet weak var tblViewArticlesList : UITableView!
+    
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.setNeedsStatusBarAppearanceUpdate()
+        self.setupTableView()
+    }
+    
+    func setupTableView(){
+        tblViewArticlesList.register(UINib(nibName: Constants.TblCellIdentifier.ArticleList, bundle: nil), forCellReuseIdentifier: Constants.TblCellIdentifier.ArticleList)
+        tblViewArticlesList.estimatedRowHeight = 50
+        tblViewArticlesList.tableFooterView = UIView()
+        if #available(iOS 13.0, *) {
+            tblViewArticlesList.refreshControl = self.refreshControl
+        }
+        else{
+            tblViewArticlesList.addSubview(self.refreshControl)
+        }
     }
     
 
@@ -27,4 +45,20 @@ class ArticleListVC: UIViewController {
     }
     */
 
+}
+
+extension ArticleListVC : UITableViewDataSource,UITableViewDelegate {
+   
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let articleCell = tableView.dequeueReusableCell(withIdentifier: Constants.TblCellIdentifier.ArticleList) as! ArticleTblCell
+        return articleCell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        UITableView.automaticDimension
+    }
+    
 }

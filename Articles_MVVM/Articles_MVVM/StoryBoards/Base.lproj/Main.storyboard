@@ -21,7 +21,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="FKi-Jr-e4q" kind="relationship" relationship="rootViewController" id="7N8-Hs-zg5"/>
+                        <segue destination="la6-UP-sLY" kind="relationship" relationship="rootViewController" id="z47-fL-RII"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TEw-Sf-jht" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -29,20 +29,40 @@
             <point key="canvasLocation" x="-1316" y="78"/>
         </scene>
         <!--Articles-->
-        <scene sceneID="Ech-3l-jDV">
+        <scene sceneID="wxQ-kX-5Mw">
             <objects>
-                <viewController storyboardIdentifier="ArticleListVC" id="FKi-Jr-e4q" customClass="ArticleListVC" customModule="Articles" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WwR-t5-FFM">
+                <viewController storyboardIdentifier="ArticleListVC" id="la6-UP-sLY" customClass="ArticleListVC" customModule="Articles" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iHI-yC-Gj1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3aw-Uw-X0Q">
+                                <rect key="frame" x="10" y="98" width="394" height="764"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="la6-UP-sLY" id="t8U-vg-oGp"/>
+                                    <outlet property="delegate" destination="la6-UP-sLY" id="Dfs-sA-p5L"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.96078431369999995" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="aga-Ms-rop"/>
+                        <constraints>
+                            <constraint firstItem="3aw-Uw-X0Q" firstAttribute="leading" secondItem="Sgx-bI-By8" secondAttribute="leading" constant="10" id="DzP-Gm-cRM"/>
+                            <constraint firstItem="Sgx-bI-By8" firstAttribute="trailing" secondItem="3aw-Uw-X0Q" secondAttribute="trailing" constant="10" id="HKL-d8-Pf2"/>
+                            <constraint firstItem="Sgx-bI-By8" firstAttribute="bottom" secondItem="3aw-Uw-X0Q" secondAttribute="bottom" id="W3M-yN-pEL"/>
+                            <constraint firstItem="3aw-Uw-X0Q" firstAttribute="top" secondItem="Sgx-bI-By8" secondAttribute="top" constant="10" id="ptl-iW-Qxb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Sgx-bI-By8"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Articles" id="fIx-fN-vvT"/>
+                    <navigationItem key="navigationItem" title="Articles" id="PM1-zj-gGJ"/>
+                    <connections>
+                        <outlet property="tblViewArticlesList" destination="3aw-Uw-X0Q" id="bHR-C6-1NR"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Oot-Y1-RFg" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9fK-hF-Uv5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-575" y="78"/>
+            <point key="canvasLocation" x="-335" y="77"/>
         </scene>
     </scenes>
 </document>
