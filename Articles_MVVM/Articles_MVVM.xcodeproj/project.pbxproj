@@ -19,6 +19,11 @@
 		F145D49F24BB1FD900A56267 /* ArticleTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145D49D24BB1FD900A56267 /* ArticleTblCell.swift */; };
 		F145D4A024BB1FD900A56267 /* ArticleTblCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F145D49E24BB1FD900A56267 /* ArticleTblCell.xib */; };
 		F1BFF31224BB2150008CA4E4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF31124BB2150008CA4E4 /* Constants.swift */; };
+		F1BFF31524BB2A15008CA4E4 /* ArticleListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF31424BB2A15008CA4E4 /* ArticleListService.swift */; };
+		F1BFF31724BB2A75008CA4E4 /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF31624BB2A75008CA4E4 /* ConnectionCheck.swift */; };
+		F1BFF31924BB2A8C008CA4E4 /* CustomLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF31824BB2A8C008CA4E4 /* CustomLoader.swift */; };
+		F1BFF31B24BB2AAA008CA4E4 /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF31A24BB2AAA008CA4E4 /* AppColor.swift */; };
+		F1BFF31D24BB2ACA008CA4E4 /* UIColour+HexColour.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BFF31C24BB2ACA008CA4E4 /* UIColour+HexColour.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +41,11 @@
 		F145D49D24BB1FD900A56267 /* ArticleTblCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTblCell.swift; sourceTree = "<group>"; };
 		F145D49E24BB1FD900A56267 /* ArticleTblCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleTblCell.xib; sourceTree = "<group>"; };
 		F1BFF31124BB2150008CA4E4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F1BFF31424BB2A15008CA4E4 /* ArticleListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListService.swift; sourceTree = "<group>"; };
+		F1BFF31624BB2A75008CA4E4 /* ConnectionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionCheck.swift; sourceTree = "<group>"; };
+		F1BFF31824BB2A8C008CA4E4 /* CustomLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLoader.swift; sourceTree = "<group>"; };
+		F1BFF31A24BB2AAA008CA4E4 /* AppColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
+		F1BFF31C24BB2ACA008CA4E4 /* UIColour+HexColour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColour+HexColour.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +78,7 @@
 		F145D46B24BB1BEC00A56267 /* Articles_MVVM */ = {
 			isa = PBXGroup;
 			children = (
+				F1BFF31324BB29E9008CA4E4 /* Services */,
 				F145D48924BB1CAD00A56267 /* AppDelegate */,
 				F145D48B24BB1D1300A56267 /* StoryBoards */,
 				F145D48324BB1C6000A56267 /* CoreData */,
@@ -108,6 +119,9 @@
 			isa = PBXGroup;
 			children = (
 				F1BFF31124BB2150008CA4E4 /* Constants.swift */,
+				F1BFF31624BB2A75008CA4E4 /* ConnectionCheck.swift */,
+				F1BFF31824BB2A8C008CA4E4 /* CustomLoader.swift */,
+				F1BFF31A24BB2AAA008CA4E4 /* AppColor.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -123,6 +137,7 @@
 		F145D48824BB1C9000A56267 /* Gloabl Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F1BFF31C24BB2ACA008CA4E4 /* UIColour+HexColour.swift */,
 			);
 			path = "Gloabl Extensions";
 			sourceTree = "<group>";
@@ -187,6 +202,14 @@
 				F145D49324BB1DFE00A56267 /* ArticleListVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		F1BFF31324BB29E9008CA4E4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F1BFF31424BB2A15008CA4E4 /* ArticleListService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,11 +286,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F145D46D24BB1BEC00A56267 /* AppDelegate.swift in Sources */,
+				F1BFF31924BB2A8C008CA4E4 /* CustomLoader.swift in Sources */,
 				F145D49F24BB1FD900A56267 /* ArticleTblCell.swift in Sources */,
 				F145D49424BB1DFE00A56267 /* ArticleListVC.swift in Sources */,
 				F145D49A24BB1F7A00A56267 /* ArticlesDataUser.swift in Sources */,
+				F1BFF31D24BB2ACA008CA4E4 /* UIColour+HexColour.swift in Sources */,
+				F1BFF31524BB2A15008CA4E4 /* ArticleListService.swift in Sources */,
 				F1BFF31224BB2150008CA4E4 /* Constants.swift in Sources */,
+				F1BFF31724BB2A75008CA4E4 /* ConnectionCheck.swift in Sources */,
 				F145D49C24BB1F7A00A56267 /* ArticlesDataModel.swift in Sources */,
+				F1BFF31B24BB2AAA008CA4E4 /* AppColor.swift in Sources */,
 				F145D49B24BB1F7A00A56267 /* ArticlesDataMedia.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

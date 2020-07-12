@@ -20,6 +20,7 @@ class ArticleListVC: UIViewController {
         // Do any additional setup after loading the view.
         self.setNeedsStatusBarAppearanceUpdate()
         self.setupTableView()
+        self.fecthArticles()
     }
     
     func setupTableView(){
@@ -34,7 +35,20 @@ class ArticleListVC: UIViewController {
         }
     }
     
-
+    func fecthArticles(){
+        if  ConnectionCheck.isConnectedToInternet() {
+            ArticleListService.shared.fetchArticles(isFromFirstPage: false, isShowLoader: true) { (error, isMoreResult) in
+                if let error = error {
+                    print("Failed to fetch articles:", error)
+                    return
+                }
+               
+            }
+        }else{
+            print("no internet connection, load data in offline mode")
+        
+        }
+    }
     /*
     // MARK: - Navigation
 
