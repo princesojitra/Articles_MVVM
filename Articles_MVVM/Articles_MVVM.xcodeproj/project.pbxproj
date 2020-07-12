@@ -8,24 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		F145D46D24BB1BEC00A56267 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145D46C24BB1BEC00A56267 /* AppDelegate.swift */; };
-		F145D46F24BB1BEC00A56267 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145D46E24BB1BEC00A56267 /* SceneDelegate.swift */; };
-		F145D47124BB1BEC00A56267 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145D47024BB1BEC00A56267 /* ViewController.swift */; };
 		F145D47424BB1BEC00A56267 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F145D47224BB1BEC00A56267 /* Main.storyboard */; };
-		F145D47724BB1BEC00A56267 /* Articles_MVVM.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F145D47524BB1BEC00A56267 /* Articles_MVVM.xcdatamodeld */; };
 		F145D47924BB1BF400A56267 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F145D47824BB1BF400A56267 /* Assets.xcassets */; };
 		F145D47C24BB1BF400A56267 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F145D47A24BB1BF400A56267 /* LaunchScreen.storyboard */; };
+		F145D48A24BB1CF000A56267 /* UserArticles.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = F145D47524BB1BEC00A56267 /* UserArticles.xcdatamodeld */; };
+		F145D49424BB1DFE00A56267 /* ArticleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145D49324BB1DFE00A56267 /* ArticleListVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F145D46924BB1BEC00A56267 /* Articles_MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Articles_MVVM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F145D46924BB1BEC00A56267 /* Articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Articles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F145D46C24BB1BEC00A56267 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F145D46E24BB1BEC00A56267 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F145D47024BB1BEC00A56267 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F145D47324BB1BEC00A56267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F145D47624BB1BEC00A56267 /* Articles_MVVM.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Articles_MVVM.xcdatamodel; sourceTree = "<group>"; };
 		F145D47824BB1BF400A56267 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F145D47B24BB1BF400A56267 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F145D47D24BB1BF400A56267 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F145D49324BB1DFE00A56267 /* ArticleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +48,7 @@
 		F145D46A24BB1BEC00A56267 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F145D46924BB1BEC00A56267 /* Articles_MVVM.app */,
+				F145D46924BB1BEC00A56267 /* Articles.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -58,16 +56,119 @@
 		F145D46B24BB1BEC00A56267 /* Articles_MVVM */ = {
 			isa = PBXGroup;
 			children = (
-				F145D46C24BB1BEC00A56267 /* AppDelegate.swift */,
-				F145D46E24BB1BEC00A56267 /* SceneDelegate.swift */,
-				F145D47024BB1BEC00A56267 /* ViewController.swift */,
-				F145D47224BB1BEC00A56267 /* Main.storyboard */,
-				F145D47824BB1BF400A56267 /* Assets.xcassets */,
-				F145D47A24BB1BF400A56267 /* LaunchScreen.storyboard */,
+				F145D48924BB1CAD00A56267 /* AppDelegate */,
+				F145D48B24BB1D1300A56267 /* StoryBoards */,
+				F145D48324BB1C6000A56267 /* CoreData */,
+				F145D48824BB1C9000A56267 /* Gloabl Extensions */,
+				F145D48624BB1C8300A56267 /* Utilities */,
+				F145D48524BB1C7700A56267 /* CustomViews */,
+				F145D48424BB1C6E00A56267 /* View Controllers */,
+				F145D48724BB1C8900A56267 /* Resources */,
 				F145D47D24BB1BF400A56267 /* Info.plist */,
-				F145D47524BB1BEC00A56267 /* Articles_MVVM.xcdatamodeld */,
 			);
 			path = Articles_MVVM;
+			sourceTree = "<group>";
+		};
+		F145D48324BB1C6000A56267 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F145D47524BB1BEC00A56267 /* UserArticles.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F145D48424BB1C6E00A56267 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F145D48C24BB1D4B00A56267 /* Article List */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		F145D48524BB1C7700A56267 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		F145D48624BB1C8300A56267 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		F145D48724BB1C8900A56267 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F145D47824BB1BF400A56267 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		F145D48824BB1C9000A56267 /* Gloabl Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Gloabl Extensions";
+			sourceTree = "<group>";
+		};
+		F145D48924BB1CAD00A56267 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				F145D46C24BB1BEC00A56267 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		F145D48B24BB1D1300A56267 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				F145D47224BB1BEC00A56267 /* Main.storyboard */,
+				F145D47A24BB1BF400A56267 /* LaunchScreen.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		F145D48C24BB1D4B00A56267 /* Article List */ = {
+			isa = PBXGroup;
+			children = (
+				F145D48D24BB1D5400A56267 /* Model */,
+				F145D48F24BB1D6300A56267 /* View */,
+				F145D48E24BB1D5C00A56267 /* ViewModel */,
+				F145D49024BB1D6800A56267 /* Controller */,
+			);
+			path = "Article List";
+			sourceTree = "<group>";
+		};
+		F145D48D24BB1D5400A56267 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F145D48E24BB1D5C00A56267 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F145D48F24BB1D6300A56267 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F145D49024BB1D6800A56267 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F145D49324BB1DFE00A56267 /* ArticleListVC.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,7 +188,7 @@
 			);
 			name = Articles_MVVM;
 			productName = Articles_MVVM;
-			productReference = F145D46924BB1BEC00A56267 /* Articles_MVVM.app */;
+			productReference = F145D46924BB1BEC00A56267 /* Articles.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -128,6 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F145D48A24BB1CF000A56267 /* UserArticles.xcdatamodeld in Resources */,
 				F145D47C24BB1BF400A56267 /* LaunchScreen.storyboard in Resources */,
 				F145D47924BB1BF400A56267 /* Assets.xcassets in Resources */,
 				F145D47424BB1BEC00A56267 /* Main.storyboard in Resources */,
@@ -141,10 +243,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F145D47124BB1BEC00A56267 /* ViewController.swift in Sources */,
 				F145D46D24BB1BEC00A56267 /* AppDelegate.swift in Sources */,
-				F145D47724BB1BEC00A56267 /* Articles_MVVM.xcdatamodeld in Sources */,
-				F145D46F24BB1BEC00A56267 /* SceneDelegate.swift in Sources */,
+				F145D49424BB1DFE00A56267 /* ArticleListVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,15 +389,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				INFOPLIST_FILE = Articles_MVVM/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.articles.app.Articles-MVVM";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.articles.app;
+				PRODUCT_NAME = Articles;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -306,15 +408,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.0.0;
 				INFOPLIST_FILE = Articles_MVVM/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.articles.app.Articles-MVVM";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.articles.app;
+				PRODUCT_NAME = Articles;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -342,13 +446,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F145D47524BB1BEC00A56267 /* Articles_MVVM.xcdatamodeld */ = {
+		F145D47524BB1BEC00A56267 /* UserArticles.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				F145D47624BB1BEC00A56267 /* Articles_MVVM.xcdatamodel */,
 			);
 			currentVersion = F145D47624BB1BEC00A56267 /* Articles_MVVM.xcdatamodel */;
-			path = Articles_MVVM.xcdatamodeld;
+			path = UserArticles.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
