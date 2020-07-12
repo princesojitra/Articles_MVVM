@@ -48,13 +48,12 @@ class ArticleListService: NSObject {
         
         URLSession.shared.dataTask(with: url) { (data, resp, err) in
             if let err = err {
-                completion(err, false)
-                print("Failed to fetch courses:", err)
+              print("Failed to fetch courses:", err)
                 if isShowLoader {
                     CustomLoader.shared.hideLoader()
                 }
                 print("******* API Log ******")
-                return
+                completion(err, false)
             }
             
             // check response
@@ -80,12 +79,12 @@ class ArticleListService: NSObject {
                             self.configure(article: article, usingArticleDataModel: articleData)
                         }
                     }
-                    completion(nil, self.isMoreResult)
                     print("Response:",articles )
                     if isShowLoader {
                         CustomLoader.shared.hideLoader()
                     }
                     print("******* API Log ******")
+                    completion(nil, self.isMoreResult)
                 }
             } catch let jsonErr {
                 print("Failed to decode:", jsonErr)
